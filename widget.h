@@ -2,6 +2,7 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <target.h>
 
 namespace Ui {
 class Widget;
@@ -17,6 +18,12 @@ public:
 
 private:
     Ui::Widget *ui;
+    QList <target*> targets;
+    QList <robot*> robots;
+public slots:
+    void action();
+
+    void paintEvent(QPaintEvent *event);
 };
 
 #endif // WIDGET_H
