@@ -8,7 +8,13 @@
 
 #define TARGET_R 5
 #define ROBOT_R 10
-#define SPEED 2;
+#define SPEED 2
+#define TAB_W 5
+#define TAB_H 10
+#define GATE_X 500
+#define GATE_Y 250
+#define HUMAN_X 50
+#define HUMAN_Y 150
 
 class target : public QObject
 {
@@ -37,18 +43,27 @@ public slots:
 
 class robot : public target
 {
+public:
     robot(int x, int y, robot* companion);
+    void wake_up();
+    void act();
+    void start_experiment(QList <target> targets);
+
 private:
     int status;
     QList <target*> targets;
     QList <target*> cargo;
     int distance(target*);
-    double rest_x, rest_y, speed_x, speed_y;
+    double f_x, f_y, speed_x, speed_y;
+    int dest_x, dest_y;
     robot* companion;
+};
+
+class tablet : public target
+{
 public:
-    void wake_up();
-    void act();
-    void start_experiment(QList <target> targets);
+    tablet(int x, int y);
+    void show(QPaintDevice*);
 };
 
 #endif // TARGET_H

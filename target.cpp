@@ -34,10 +34,28 @@ robot::robot(int x, int y, robot* companion)
     this->y = y;
     this->radius = ROBOT_R;
     this->companion = companion;
+    status = SEARCHING;
 }
 
 void robot::act()
 {
+    switch (status) {
+
+    }
+}
+
+
+tablet::tablet(int x, int y) : target(x, y)
+{
 
 }
 
+void tablet::show(QPaintDevice* d)
+{
+    QPainter p;
+    p.begin(d);
+    p.setPen(QPen(Qt::black,2));
+    p.drawRect(x, y, TAB_W, TAB_H);
+    p.drawEllipse(x, y, radius, radius);
+    p.end();
+}
