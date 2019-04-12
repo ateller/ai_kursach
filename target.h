@@ -23,7 +23,7 @@ public:
     target();
     target(int x, int y);
     void move(int dx, int dy);
-    void show(QPaintDevice*);
+    virtual void show(QPaintDevice*);
     int get_room();
     int get_x();
     int get_y();

@@ -10,6 +10,25 @@ Widget::Widget(QWidget *parent) :
     connect(ui->pushButton, SIGNAL(clicked()), SLOT(action()));
 
     targets.append(new target(300, 100));
+    targets.append(new target(400, 100));
+    targets.append(new target(400, 200));
+    targets.append(new target(300, 200));
+
+    targets.append(new target(600, 100));
+    targets.append(new target(700, 100));
+    targets.append(new target(700, 200));
+    targets.append(new target(800, 200));
+
+    exp_start* e = new exp_start;
+    e->init(targets.size());
+    e->show();
+    e->exec();
+    is_closed = !e->result();
+    QList<bool> checks = e->get_res();
+
+    QList<target> experiment;
+
+    targets.append(new tablet(350, 400));
 }
 
 Widget::~Widget()

@@ -56,6 +56,5 @@ void tablet::show(QPaintDevice* d)
     p.begin(d);
     p.setPen(QPen(Qt::black,2));
     p.drawRect(x, y, TAB_W, TAB_H);
-    p.drawEllipse(x, y, radius, radius);
     p.end();
 }

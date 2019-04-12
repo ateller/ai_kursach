@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <target.h>
+#include <exp_start.h>
 
 namespace Ui {
 class Widget;
@@ -15,6 +16,7 @@ class Widget : public QWidget
 public:
     explicit Widget(QWidget *parent = nullptr);
     ~Widget();
+    bool is_closed;
 
 private:
     Ui::Widget *ui;
