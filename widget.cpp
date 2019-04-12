@@ -49,21 +49,62 @@ void Widget::paintEvent(QPaintEvent *event)
     //Левая нога
 
     P.save();
-    P.translate(40,97);
+    P.translate(42,93);
     P.rotate(-55);
-    P.drawEllipse(0,0,30,10);
+    P.drawEllipse(0,0,25,10);
     P.restore();
     //Левое плечо
 
     P.save();
     P.translate(25,74);
-    P.rotate(45);
+    P.rotate(42);
     P.drawEllipse(0,0,30,10);
     P.restore();
     //Левое предплечье
 
     P.drawEllipse(12,73,10,7);
     //Левая кисть
+
+    P.save();
+    P.translate(77,64);
+    P.rotate(10);
+    P.drawEllipse(0,0,25,10);
+    P.restore();
+    //Правое плечо
+
+    P.save();
+    P.translate(106,72);
+    P.rotate(60);
+    P.drawEllipse(0,0,30,10);
+    P.restore();
+    //Правое предплечье
+
+    P.drawEllipse(116,98,10,7);
+    //Правая кисть
+
+    P.save();
+    P.translate(86,133);
+    P.rotate(20);
+    P.drawEllipse(0,0,30,10);
+    P.restore();
+    //Левая нижняя нога
+
+    P.drawEllipse(111,147,7,10);
+    //Левая стопа
+
+    P.save();
+    P.translate(120,122);
+    P.rotate(-5);
+    P.drawEllipse(0,0,30,10);
+    P.restore();
+    //Правая нижняя нога
+
+    P.save();
+    P.translate(149,126);
+    P.rotate(-50);
+    P.drawEllipse(0,0,7,10);
+    P.restore();
+    //Правая стопа
 
     P.drawLine(10,10,10,500);
     P.drawLine(990,10,990,500);
