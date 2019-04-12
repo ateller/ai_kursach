@@ -36,10 +36,10 @@ signals:
 public slots:
 };
 
-#define MOVING 1;
-#define SEARCHING 2;
-#define WAITING 3;
-#define FINISHED 4;
+#define MOVING 1
+#define SEARCHING 2
+#define WAITING 3
+#define FINISHED 4
 
 class robot : public target
 {

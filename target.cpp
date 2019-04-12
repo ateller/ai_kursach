@@ -40,7 +40,14 @@ robot::robot(int x, int y, robot* companion)
 void robot::act()
 {
     switch (status) {
-
+    case MOVING:
+        break;
+    case SEARCHING:
+        break;
+    case WAITING:
+        break;
+    case FINISHED:
+        break;
     }
 }
 

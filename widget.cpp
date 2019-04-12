@@ -26,9 +26,23 @@ Widget::Widget(QWidget *parent) :
     is_closed = !e->result();
     QList<bool> checks = e->get_res();
 
-    QList<target> experiment;
+    QList<target*> experiment;
+    QList<bool>::iterator b = checks.begin();
+    QList<target*>::iterator t = targets.begin();
+
+    for(;b != checks.end(); b++, t++)
+    {
+        if(*b)
+        {
+            experiment.append(*t);
+        }
+    }
 
     targets.append(new tablet(350, 400));
+    experiment.append(targets.back());
+
+    robots.append(new robot(400, 400, nullptr));
+    robots.append(new robot(600, 400, robots.back()));
 }
 
 Widget::~Widget()
