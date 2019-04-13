@@ -8,6 +8,7 @@ Widget::Widget(QWidget *parent) :
     ui->setupUi(this);
 
     connect(ui->pushButton, SIGNAL(clicked()), SLOT(action()));
+    setWindowTitle("SKYBAL");
 
     targets.append(new target(300, 100));
     targets.append(new target(400, 100));
@@ -43,6 +44,11 @@ Widget::Widget(QWidget *parent) :
 
     robots.append(new robot(400, 400, nullptr));
     robots.append(new robot(600, 400, robots.back()));
+
+    foreach(robot* temp, robots)
+    {
+        temp->start_experiment(experiment);
+    }
 }
 
 Widget::~Widget()
@@ -160,13 +166,16 @@ void Widget::paintEvent(QPaintEvent *event)
 
     //P.draw
 
+    foreach (robot* r, robots)
+    {
+        r->act();
+    }
     foreach (target* t, targets)
     {
         t->show(this);
     }
     foreach (robot* r, robots)
     {
-        r->act();
         r->show(this);
     }
     P.end();
