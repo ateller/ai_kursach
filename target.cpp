@@ -214,7 +214,7 @@ void robot::decision(target *t)
 
 void robot::move()
 {
-    if((abs(x - dest_x) <= abs(static_cast<int>(speed_x+0.5)))&&(abs(y - dest_y) <= abs(static_cast<int>(speed_y+0.5))))
+    if((abs(x - dest_x) <= abs(static_cast<int>(1.5*speed_x)))&&(abs(y - dest_y) <= abs(static_cast<int>(1.5*speed_y))))
     {
         foreach(target* temp, cargo)
         {

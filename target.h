@@ -8,7 +8,7 @@
 
 #define TARGET_R 6
 #define ROBOT_R 10
-#define SPEED 1
+#define SPEED 2
 #define TAB_W 6
 #define TAB_H 12
 #define GATE_X 500
