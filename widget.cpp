@@ -39,11 +39,11 @@ Widget::Widget(QWidget *parent) :
         }
     }
 
-    targets.append(new tablet(350, 400));
+    targets.append(new tablet(350, 30));
     experiment.append(targets.back());
 
-    robots.append(new robot(400, 400, nullptr));
-    robots.append(new robot(600, 400, robots.back()));
+    robots.append(new robot(400, 400, nullptr, GATE_X + 15, GATE_Y, GATE_X - 15, GATE_Y));
+    robots.append(new robot(600, 400, robots.back(), GATE_X + 15, GATE_Y, GATE_X - 15, GATE_Y));
 
     foreach(robot* temp, robots)
     {

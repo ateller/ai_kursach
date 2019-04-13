@@ -13,8 +13,8 @@
 #define TAB_H 12
 #define GATE_X 500
 #define GATE_Y 250
-#define HUMAN_X 50
-#define HUMAN_Y 150
+#define HUMAN_X 150
+#define HUMAN_Y 50
 #define ROOMS_COUNT 2
 
 class target : public QObject
@@ -48,8 +48,9 @@ class robot : public target
 {
     Q_OBJECT
 public:
-    robot(int x, int y, robot* companion);
-    void wake_up();
+    robot(int x, int y, robot* companion, int gate_1_x, int gate_1_y, int gate_2_x, int gate_2_y);
+    void wake_up(QList<target*> take);
+    bool r_u_here();
     void act();
     void start_experiment(QList<target *> targets);
     void grab(target*);
@@ -64,9 +65,10 @@ private:
     void decision(target* t);
     void move();
     void show_tabl();
+    void wait();
 
     double f_x, f_y, speed_x, speed_y;
-    int dest_x, dest_y;
+    int dest_x, dest_y, gate_1_x, gate_1_y, gate_2_x, gate_2_y;
     robot* companion;
 };
 

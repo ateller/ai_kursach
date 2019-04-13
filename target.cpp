@@ -57,15 +57,37 @@ int target::dist(int tx, int ty, int troom)
     return d;
 }
 
-robot::robot(int x, int y, robot* companion)
+robot::robot(int x, int y, robot* companion, int gate_1_x, int gate_1_y, int gate_2_x, int gate_2_y)
 {
     this->x = x;
     this->y = y;
+    this->gate_1_x = gate_1_x;
+    this->gate_1_y = gate_1_y;
+    this->gate_2_x = gate_2_x;
+    this->gate_2_y = gate_2_y;
     this->radius = ROBOT_R;
     this->companion = companion;
     status = SEARCHING;
     if(x > 500) room = 1;
     else room = 0;
+}
+
+void robot::wake_up(QList<target *> take)
+{
+    foreach(target* t, take)
+    {
+        grab(t);
+        targets.removeOne(t);
+    }
+    status = SEARCHING;
+}
+
+bool robot::r_u_here()
+{
+    if((status == WAITING) && (room < next->get_room()))
+        return true;
+    else
+        return false;
 }
 
 void robot::act()
@@ -80,6 +102,7 @@ void robot::act()
         select();
         break;
     case WAITING:
+        wait();
         break;
     case FINISHED:
         break;
@@ -156,21 +179,20 @@ void robot::decision(target *t)
                 status = TO_HUMAN;
             }
             else {
-                go_to(GATE_X + 15, GATE_Y);
+                go_to(gate_1_x, gate_1_y);
                 status = TO_GATE;
             }
         }
     }
     else {
+        next = t;
         if(t->get_room() == room)
         {
             go_to(t->get_x(),t->get_y());
             status = TO_TARGET;
-            next = t;
         }
         else
         {
-            next = nullptr;
             if(t->get_room() < room)
             {
                 if(cargo.isEmpty() == true)
@@ -178,12 +200,12 @@ void robot::decision(target *t)
                     status = FINISHED;
                 }
                 else {
-                    go_to(GATE_X + 15, GATE_Y);
+                    go_to(gate_1_x, gate_1_y);
                     status = TO_GATE;
                 }
             }
             else {
-                go_to(GATE_X - 15, GATE_Y);
+                go_to(gate_2_x, gate_2_y);
                 status = TO_GATE;
             }
         }
@@ -199,7 +221,7 @@ void robot::move()
             temp->move(dest_x - x, dest_y - y);
         }
         teleport(dest_x, dest_y);
-        if(next != nullptr)
+        if(status == TO_TARGET)
         {
             grab(next);
             status = SEARCHING;
@@ -208,9 +230,10 @@ void robot::move()
         {
             if(status == TO_GATE)
                 status = WAITING;
-            else
+            else {
                 show_tabl();
                 status = FINISHED;
+            }
         }
         return;
     }
@@ -235,6 +258,20 @@ void robot::show_tabl()
         {
             t->teleport(x - 15, y);
         }
+    }
+}
+
+void robot::wait()
+{
+    if(next != nullptr)
+        if(next->get_room() > room)
+            return;
+    if(companion->r_u_here() == true)
+    {
+        companion->wake_up(cargo);
+        cargo.clear();
+        targets.clear();
+        status = FINISHED;
     }
 }
 
