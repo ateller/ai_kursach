@@ -7,13 +7,13 @@ exp_start::exp_start(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setWindowTitle("Start");
+    setWindowTitle("Начало");
 }
 
 void exp_start::init(int n)
 {
     this->n = n;
-    ui->verticalLayout_2->addWidget(new QLabel("Choose the things you need for the experiment"));
+    ui->verticalLayout_2->addWidget(new QLabel("Выберите вещи, нужные для эксперимента"));
     for(int i = 0; i < n; i++)
     {
         ui->verticalLayout_2->addWidget(new QCheckBox(QString::number(i + 1)));
