@@ -116,7 +116,7 @@ void robot::start_experiment(QList<target*> targets)
 
 void robot::grab(target *t)
 {
-    t->teleport(x + static_cast<int>(15*cos(((cargo.size()-4)*M_PI)/6)), y + static_cast<int>(15*sin(((cargo.size()-4)*M_PI)/6)));
+    t->teleport(x + static_cast<int>(15*cos(((cargo.size()-4.5)*M_PI)/6)), y + static_cast<int>(15*sin(((cargo.size()-4.5)*M_PI)/6)));
     cargo.append(t);
 }
 

@@ -10,15 +10,16 @@ Widget::Widget(QWidget *parent) :
     connect(ui->pushButton, SIGNAL(clicked()), SLOT(action()));
     setWindowTitle("SKYBAL");
 
-    targets.append(new target(300, 100));
-    targets.append(new target(400, 100));
-    targets.append(new target(400, 200));
-    targets.append(new target(300, 200));
+    targets.append(new target(300, 190));
+    targets.append(new target(450, 130));
+    targets.append(new target(250, 330));
+    targets.append(new target(400, 420));
 
-    targets.append(new target(600, 100));
-    targets.append(new target(700, 100));
-    targets.append(new target(700, 200));
-    targets.append(new target(800, 200));
+    targets.append(new target(650, 320));
+    targets.append(new target(550, 450));
+    targets.append(new target(700, 70));
+    targets.append(new target(800, 250));
+    targets.append(new target(900, 290));
 
     exp_start* e = new exp_start;
     e->init(targets.size());
@@ -39,10 +40,10 @@ Widget::Widget(QWidget *parent) :
         }
     }
 
-    targets.append(new tablet(350, 30));
+    targets.append(new tablet(259, 148));
     experiment.append(targets.back());
 
-    robots.append(new robot(400, 400, nullptr, GATE_X + 15, GATE_Y, GATE_X - 15, GATE_Y));
+    robots.append(new robot(200, 400, nullptr, GATE_X + 15, GATE_Y, GATE_X - 15, GATE_Y));
     robots.append(new robot(600, 400, robots.back(), GATE_X + 15, GATE_Y, GATE_X - 15, GATE_Y));
 
     foreach(robot* temp, robots)
@@ -58,6 +59,10 @@ Widget::~Widget()
 
 void Widget::action()
 {
+    foreach (robot* r, robots)
+    {
+        r->act();
+    }
     repaint();
 }
 
@@ -151,25 +156,19 @@ void Widget::paintEvent(QPaintEvent *event)
     P.drawLine(10,10,490,10);
     P.drawLine(510,10,990,10);
     //Горизонтальные сверху
-    P.drawLine(490,10,500,180);
-    P.drawLine(510,10,500,180);
+    P.drawLine(490,10,500,140);
+    P.drawLine(510,10,500,140);
     //Косые сверху
-    P.drawLine(500,180,500,230);
-    P.drawLine(500,270,500,320);
+    P.drawLine(500,140,500,200);
+    P.drawLine(500,300,500,360);
     //Вертикальные в середине
-    P.drawLine(490,500,500,320);
-    P.drawLine(510,500,500,320);
+    P.drawLine(490,500,500,360);
+    P.drawLine(510,500,500,360);
     //Косые снизу
     P.drawLine(10,500,490,500);
     P.drawLine(510,500,990,500);
     //Горизонтальные снизу
 
-    //P.draw
-
-    foreach (robot* r, robots)
-    {
-        r->act();
-    }
     foreach (target* t, targets)
     {
         t->show(this);

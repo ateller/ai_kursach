@@ -48,7 +48,7 @@
       <bool>true</bool>
      </property>
      <property name="autoRepeatDelay">
-      <number>300</number>
+      <number>50</number>
      </property>
      <property name="autoRepeatInterval">
       <number>50</number>
